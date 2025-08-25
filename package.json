@@ -1,0 +1,70 @@
+{
+  "name": "allyti",
+  "version": "1.0.0",
+  "description": "Dual-community platform for IIT/IIM students and alumni",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:mobile": "npm run start --workspace=apps/mobile",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:unit": "jest --projects=apps/*/jest.config.js packages/*/jest.config.js",
+    "test:integration": "jest --config=tests/integration/jest.config.js",
+    "test:e2e": "cypress run",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "type-check": "tsc --noEmit --composite false",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "setup:dev": "node scripts/setup-dev.js",
+    "db:migrate": "npm run migrate --workspace=packages/database",
+    "db:seed": "npm run seed --workspace=packages/database",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
+    "reset": "npm run clean && npm install && npm run setup:dev"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "concurrently": "^8.2.2",
+    "cypress": "^13.6.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/allyti.git"
+  },
+  "author": "Allyti Team",
+  "license": "MIT",
+  "keywords": [
+    "iit",
+    "iim",
+    "networking",
+    "community",
+    "students",
+    "alumni",
+    "professional",
+    "anonymous"
+  ]
+}
